@@ -1,12 +1,19 @@
+import sqlite3
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
+def get_db_connection():
+    conn = sqlite3.connect('camino.db')
+    conn.row_factory = sqlite3.Row # 這行能讓妳用 row['name'] 而不只是 index
+    return conn
+
 @app.route('/')
-def home():
-    # 我們不再回傳一串文字，而是告訴 Flask 渲染 (render) 那個 HTML 檔案
-    return render_template('index.html')
+def index():
+    conn = get_db_connection()
+    desserts = conn.execute('SELECT * FROM desserts').fetchall()
+    conn.close()
+    return render_template('index.html', desserts=desserts)
 
 if __name__ == '__main__':
-    # 開啟 debug 模式，方便我們之後邊改邊看
     app.run(debug=True)
