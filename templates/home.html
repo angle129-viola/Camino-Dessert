@@ -1,20 +1,40 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Camino Dessert | Sweet Lab</title>
+
 </head>
+
 <body>
+
     <h1 style="color: #E89ABE;">Camino Dessert Sweet Lab</h1>
+
     <p>The exclusive development base for Viola.</p>
+
     <p>This page is now served from a professional template file!</p>
+
     <h2>Menu Of The Day</h2>
+
 <ul>
+
     {% for dessert in desserts %}
-    <li>{{ dessert['name'] }} — NT$ {{ dessert['price'] }}</li>
+<li>
+    <a href="/dessert/{{ dessert['id'] }}">{{ dessert['name'] }}</a> 
+    - NT$ {{ dessert['price'] }}
+</li>
     {% endfor %}
+
 </ul>
+
     <img src="{{ url_for('static', filename='Camino Dessert Logo (IG Version).png') }}" alt="Welcome to the sweet studio - Camino Dessert!Your Sweet Step Forward." style="width: 300px;">
+
 </body>
+
 </html>

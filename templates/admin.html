@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Camino Dessert Admin</title>
+</head>
+<body>
+    <h1>Camino Dessert 後台管理</h1>
+
+    <form action="/add" method="POST">
+        <input type="text" name="dessert_name" placeholder="甜點名稱" required>
+        <input type="number" name="dessert_price" placeholder="價格" required>
+        <input type="text" name="dessert_ingredients" placeholder="成分" required>
+        <button type="submit">確認新增</button>
+    </form>
+
+    <hr>
+
+    <ul>
+        {% for item in items %}
+        <li>{{ item[1] }} - NT$ {{ item[2] }} - Ingredients {{ item[3] }}</li>
+        {% endfor %}
+    </ul>
+    <ul>
+    {% for item in items %}
+    <li>
+        <strong>{{ item['name'] }}</strong> — NT$ {{ item['price'] }}</strong> — NT$ {{ item['ingredients'] }}
+        
+        <form action="/delete" method="POST" style="display:inline;">
+            <input type="hidden" name="target_id" value="{{ item['id'] }}">
+            <button type="submit">下架</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
